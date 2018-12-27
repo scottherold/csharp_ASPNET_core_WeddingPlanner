@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace WeddingPlanner.Controllers
 {
-    
+
     public class UsersController : Controller
     {
         // <---------- Context Setup ---------->
@@ -65,6 +65,7 @@ namespace WeddingPlanner.Controllers
                     // If all checks pass, redirects to the Wedding Dashboard
                     else
                     {
+                        ViewBag.LoggedIn = "LoggedIn";
                         return RedirectToAction("Index","Weddings");
                     }
                 }
@@ -86,6 +87,7 @@ namespace WeddingPlanner.Controllers
             // Else kill Session and proceed
             else
             {
+                ViewBag.LoggedIn = null;
                 HttpContext.Session.Clear();
                 return View();
             }

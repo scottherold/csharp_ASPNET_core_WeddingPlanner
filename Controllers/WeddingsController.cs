@@ -69,6 +69,7 @@ namespace WeddingPlanner.Controllers
                         
                         // Query of all weddings to list for the index page
                         ViewBag.UserId = (int)userId;
+                        ViewBag.LoggedIn = "LoggedIn";
 
                         List<Wedding> weddings = dbContext.Weddings
                             .Include(w => w.Attendees)
@@ -95,6 +96,7 @@ namespace WeddingPlanner.Controllers
             }
             else
             {
+                ViewBag.LoggedIn = "LoggedIn";
                 ViewBag.UserId = HttpContext.Session.GetInt32("UserId");
                 return View("New");
             }
@@ -114,6 +116,8 @@ namespace WeddingPlanner.Controllers
             }
             else
             {
+                ViewBag.LoggedIn = "LoggedIn";
+
                 // Query the DB for the routed wedding
                 Wedding wedding = dbContext.Weddings
                 .Include(w => w.Attendees)
@@ -142,6 +146,8 @@ namespace WeddingPlanner.Controllers
             {
                 if(ModelState.IsValid)
                 {
+                    ViewBag.LoggedIn = "LoggedIn";
+
                     // updates the DateTime values for the DB entry
                     wedding.CreatedAt = DateTime.Now;
                     wedding.UpdatedAt = DateTime.Now;
@@ -154,6 +160,7 @@ namespace WeddingPlanner.Controllers
                 }
                 else
                 {
+                    ViewBag.LoggedIn = "LoggedIn";
                     return View("New");
                 }
             }
@@ -201,11 +208,13 @@ namespace WeddingPlanner.Controllers
                         // If query null, redirect to the Index
                         if(deleteWedding == null)
                         {
+                            ViewBag.LoggedIn = "LoggedIn";
                             return RedirectToAction("Index");
                         }
                         // Else query to delete the wedding
                         else
                         {
+                            ViewBag.LoggedIn = "LoggedIn";
                             dbContext.Weddings.Remove(deleteWedding);
                             dbContext.SaveChanges();
                             return RedirectToAction("Index");
