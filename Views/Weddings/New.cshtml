@@ -1,0 +1,33 @@
+@model Wedding
+<!-- Insert Model Here -->
+<div class="row justify-content-center">
+    <div class="col-lg-10 rounded justify-content-center m-4 bg-white">
+        <div class="row justify-content-center m-3">
+            <h1 class="m-3">Please Register Below!</h1>
+        </div>
+        <form asp-action="Create" asp-controller="Weddings" method="POST">
+            <div class="form-row justify-content-center mt-3 mx-3">
+                <div class="col-md-3 mt-3 mx-3 text-center">
+                    <label asp-for="Wedder1"><h5>Wedder One</h5></label>
+                    <input asp-for="Wedder1" class="w-100">
+                    <p><span asp-validation-for="Wedder1" class="text-danger"></span></p>
+                    <label asp-for="Wedder2"><h5 class="mt-2">Wedder Two</h5></label>
+                    <input asp-for="Wedder2" class="w-100">
+                    <p><span asp-validation-for="Wedder2" class="text-danger"></span></p>
+                    <label asp-for="Date"><h5>Wedding Date</h5></label>
+                    <input asp-for="Date" type="Date" class="w-100">
+                    <p><span asp-validation-for="Date" class="text-danger"></span></p>
+                </div>
+            </div>
+            <div class="form-row justify-content-center mx-3">
+                <div class="col-md-6 mx-3 mb-2 text-center">
+                    <label asp-for="Address"><h5 class="mt-2">Wedding Address</h5></label>
+                    <input asp-for="Address" type="Address" class="w-100">
+                    <p><span asp-validation-for="Address" class="text-danger"></span></p>
+                </div>
+            </div>
+            <div class="form-row justify-content-center mb-3">
+                <button type="submit" class="btn btn-success mt-2">Create Wedding</button>
+        </form>
+    </div>
+</div>

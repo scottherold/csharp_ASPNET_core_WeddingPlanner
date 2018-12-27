@@ -1,0 +1,52 @@
+@model List<Wedding>
+<!-- Insert Model Here -->
+<div class="row justify-content-center">
+    <div class="col-lg-10 rounded justify-content-center m-4 bg-white">
+        <div class="row justify-content-center m-3">
+            <h1>Welcome to Wedding Planner</h1>
+        </div>
+        <div class="row justify-content-center m-3">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Wedding</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Guests</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var wedding in Model)
+                    {
+                        <tr>
+                            <td><a asp-action="show" asp-route-weddingId="@wedding.WeddingId"asp-controller="Weddings">@wedding.Wedder1 and @wedding.Wedder2</a></td>
+                            <td>@wedding.Date.ToString("MMM d, yyyy")</td>
+                            <td>@wedding.Attendees.Count()</td>
+                            @if(wedding.UserId == ViewBag.UserId)
+                            {
+                                <form asp-action="Destroy" asp-controller="Weddings" asp-route-weddingId="@wedding.WeddingId" method="POST">
+                                    <td><button type="submit" class="btn btn-danger mt-2">DELETE</button></td>
+                                </form>
+                            }
+                            else if(wedding.Attendees.Any(a => a.UserId == ViewBag.UserId))
+                            {
+                                <form asp-action="Destroy" asp-controller="Attendees" asp-route-weddingId="@wedding.WeddingId" method="POST">
+                                    <td><button type="submit" class="btn btn-danger">Un-RSVP</button></td>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Create" asp-controller="Attendees" asp-route-weddingId="@wedding.WeddingId" method="POST">
+                                    <td><button type="submit" class="btn btn-success">RSVP</button></td>
+                                </form>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center m-3">
+            <a asp-action="New" asp-controller="Weddings" class="btn btn-primary my-2 mr-3">New Wedding</a>
+        </div>
+    </div>
+</div>

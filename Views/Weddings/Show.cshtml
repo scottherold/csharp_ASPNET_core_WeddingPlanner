@@ -1,0 +1,30 @@
+@model Wedding
+<!-- Insert Model Here -->
+<div class="row justify-content-center">
+    <div class="col-lg-10 rounded justify-content-center m-4 bg-white">
+        <div class="row justify-content-center m-3">
+            <h1>@Model.Wedder1 and @Model.Wedder2's Wedding</h1>
+        </div>
+        <div class="row justify-content-center m-3">
+            <h3>Date: @Model.Date.ToString("MMM d, yyyy")</h3>
+        </div>
+        <div class="row justify-content-center m-3">
+            <h3>Venue: @Model.Address</h3>
+        </div>
+        <div class="form-row justify-content-center m-3">
+            <div class="col-md-6 m-3 text-center">
+                <h3>Guests:</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        @foreach(var attendee in Model.Attendees)
+                        {
+                            <tr>
+                                <td>@attendee.Guest.FirstName @attendee.Guest.LastName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
